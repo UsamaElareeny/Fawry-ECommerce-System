@@ -2,7 +2,6 @@ package com.example.fawryecommercesystem;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.Alert;
 import java.time.LocalDate;
 import java.util.HashMap;
@@ -38,7 +37,7 @@ public class HelloController {
     @FXML private Label shipping;
     @FXML private Label amount;
 
-    // Newly added product name display textareas
+    // Newly added product name display labels
     @FXML private Label cheeseAmount;
     @FXML private Label biscuitsAmount;
     @FXML private Label TVAmount;
@@ -60,7 +59,6 @@ public class HelloController {
             quantities.put(product, 0);
         }
 
-        // Set product names in amount text areas
         cheeseAmount.setText("Cheese");
         biscuitsAmount.setText("Biscuits");
         TVAmount.setText("TV");
@@ -72,7 +70,7 @@ public class HelloController {
 
     private void initializeProducts() {
         products = new HashMap<>();
-        products.put("Cheese", new ExpirableProduct("Cheese", 100, 50, true, 0.2, LocalDate.now().plusDays(7)));
+        products.put("Cheese", new ExpirableProduct("Cheese", 100, 5, true, 0.2, LocalDate.now().minusDays(1)));
         products.put("Biscuits", new ExpirableProduct("Biscuits", 150, 30, true, 0.7, LocalDate.now().plusDays(30)));
         products.put("TV", new NonExpirableProduct("TV", 500, 10, true, 5.0));
         products.put("Vouchers", new NonExpirableProduct("Vouchers", 25, 100, false, 0.0));
@@ -80,7 +78,7 @@ public class HelloController {
     }
 
     private void initializeCustomer() {
-        customer = new Customer("Usama Elareeny", 2000.0);
+        customer = new Customer("Usama Elareeny", 1000);
     }
 
     @FXML private void addCheese() { addToCart("Cheese", quantityCheese); }
@@ -98,6 +96,30 @@ public class HelloController {
             }
 
             Product product = products.get(productName);
+
+            if (product instanceof ExpirableProduct expirable && expirable.isExpired()) {
+                showAlert("Error", productName + " is expired and cannot be added.");
+                return;
+            }
+
+            if (quantity > product.getQuantity()) {
+                showAlert("Error", "Not enough stock for " + productName);
+                return;
+            }
+
+            double itemTotalPrice = product.getPrice() * quantity;
+            double shippingFee = product.isShippable()
+                    ? ShippingService.calculateShippingFee(java.util.List.of((ShippableItem) product))
+                    : 0.0;
+            double totalCost = itemTotalPrice + shippingFee;
+
+            if (customer.getBalance() < totalCost) {
+                showAlert("Error", "Insufficient balance to purchase " + productName);
+                return;
+            }
+
+            customer.deductBalance(totalCost);
+            product.decreaseQuantity(quantity);
             cart.addItem(product, quantity);
 
             quantities.put(productName, 0);
@@ -105,19 +127,9 @@ public class HelloController {
 
             updateDisplay();
             showAlert("Success", quantity + "x " + productName + " added to cart!");
+
         } catch (NumberFormatException e) {
             showAlert("Error", "Invalid quantity format!");
-        } catch (Exception e) {
-            showAlert("Error", e.getMessage());
-        }
-    }
-
-    @FXML private void checkout() {
-        try {
-            CheckoutService.checkout(customer, cart);
-            cart.clear();
-            updateDisplay();
-            showAlert("Success", "Checkout completed successfully!");
         } catch (Exception e) {
             showAlert("Error", e.getMessage());
         }
@@ -150,27 +162,27 @@ public class HelloController {
                 case "Cheese" -> {
                     cheeseShipmentAmount.setText(itemText);
                     cheeseWeight.setText(weightText);
-                    cheeseAmount.setText(itemText); // Sync with cheeseAmount
+                    cheeseAmount.setText(itemText);
                 }
                 case "Biscuits" -> {
                     biscuitsShipmentAmount.setText(itemText);
                     biscuitsWeight.setText(weightText);
-                    biscuitsAmount.setText(itemText); // Sync with biscuitsAmount
+                    biscuitsAmount.setText(itemText);
                 }
                 case "TV" -> {
                     tvShipmentAmount.setText(itemText);
                     tvWeight.setText(weightText);
-                    TVAmount.setText(itemText); // Sync with TVAmount
+                    TVAmount.setText(itemText);
                 }
                 case "Vouchers" -> {
                     voucherShipmentAmount.setText(itemText);
                     voucherWeight.setText(weightText);
-                    voucherAmount.setText(itemText); // Sync with voucherAmount
+                    voucherAmount.setText(itemText);
                 }
                 case "Scratchers" -> {
                     scratcherShipmentAmount.setText(itemText);
                     scratcherWeight.setText(weightText);
-                    scratcherAmount.setText(itemText); // Sync with scratcherAmount
+                    scratcherAmount.setText(itemText);
                 }
             }
         }

@@ -9,7 +9,9 @@ public class Customer {
         this.balance = balance;
     }
 
+    public String getName() { return name; }
     public double getBalance() { return balance; }
+    public void setBalance(double balance) { this.balance = balance; }
 
     public void deductBalance(double amount) throws Exception {
         if (balance < amount) {

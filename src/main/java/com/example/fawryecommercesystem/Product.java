@@ -2,7 +2,7 @@ package com.example.fawryecommercesystem;
 
 import java.time.LocalDate;
 
-public abstract class Product {
+public abstract class Product implements ShippableItem{
     protected String name;
     protected double price;
     protected int quantity;
@@ -34,5 +34,14 @@ public abstract class Product {
 
     public boolean isInStock(int requestedQuantity) {
         return quantity >= requestedQuantity;
+    }
+
+    // ✅ Add these two:
+    public boolean isShippable() {
+        return requiresShipping;
+    }
+
+    public void decreaseQuantity(int amount) {
+        this.quantity -= amount;
     }
 }
