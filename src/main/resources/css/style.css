@@ -1,0 +1,128 @@
+.right-side {
+    -fx-background-color: #0D0D0D;
+    -fx-background-radius: 10px;
+    -fx-background-insets: 0;
+    -fx-border-color: white;
+    -fx-border-radius: 10px;
+}
+
+.item{
+    -fx-background-color: #EFEDEE;
+    -fx-border-width: 0.2px;
+    -fx-background-radius: 20px;
+    -fx-border-radius: 20px;
+    -fx-border-color: black;
+    -fx-opacity: 1;
+    -fx-padding: 4px 5px;
+}
+
+.product-name {
+  -fx-text-fill: black;
+  -fx-font-size: 18px;
+  -fx-font-weight: bold;
+  -fx-font-family: "Roboto", sans-serif;
+  -fx-alignment: top-left;
+}
+
+.add-cart {
+  -fx-background-color: black;
+  -fx-text-fill: white;
+  -fx-font-family: "Roboto", sans-serif;
+  -fx-font-size: 11px;
+  -fx-font-weight: bold;
+  -fx-background-radius: 20px;
+  -fx-border-radius: 20px;
+  -fx-padding: 8px 16px;
+  -fx-cursor: hand;
+  -fx-opacity: 1;
+  -fx-transition-property: -fx-opacity;
+  -fx-transition-duration: 200ms;
+}
+
+.add-cart:hover {
+   -fx-opacity: 0.7;
+}
+
+.add-cart:pressed {
+  -fx-background-color: #555555;
+  -fx-text-fill: #ffe066;
+}
+
+.middle-label {
+  -fx-text-fill: black;
+  -fx-font-family: "Roboto", sans-serif;
+  -fx-font-size: 14px;
+  -fx-font-weight: bold;
+  -fx-alignment: center;
+  -fx-text-alignment: center;
+}
+.plus-minus {
+  -fx-text-alignment: center;
+  -fx-background-color: white;
+  -fx-text-fill: black;
+  -fx-border-color: black;
+  -fx-border-width: 0.5px;
+  -fx-border-radius: 50em;
+  -fx-background-radius: 50em;
+  -fx-font-family: "Roboto", sans-serif;
+  -fx-font-size: 12px;
+  -fx-font-weight: bold;
+  -fx-cursor: hand;
+  -fx-opacity: 1;
+  -fx-transition-property: -fx-opacity;
+  -fx-transition-duration: 200ms;
+}
+
+.plus-minus:hover {
+  -fx-opacity: 0.7;
+}
+
+.plus-minus:pressed {
+  -fx-opacity: 0.5;
+}
+.tag{
+  -fx-text-fill: black;
+  -fx-font-size: 16px;
+  -fx-font-family: "Roboto", sans-serif;
+  -fx-alignment: top-right;
+}
+.header{
+  -fx-background-color: black;
+  -fx-text-fill: white;
+  -fx-font-family: "Roboto", sans-serif;
+  -fx-font-size: 25px;
+  -fx-font-weight: bold;
+}
+
+.right-area {
+    -fx-background-color: transparent;
+    -fx-font-family: "Roboto", sans-serif;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+    -fx-pref-height: 30px;
+    -fx-pref-width: 172px;
+    -fx-padding: 0;
+    -fx-control-inner-background: transparent;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-alignment: center-right;
+}
+.left-area {
+    -fx-background-color: transparent;
+    -fx-font-family: "Roboto", sans-serif;
+    -fx-font-size: 25px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+    -fx-pref-height: 30px;
+    -fx-pref-width: 172px;
+    -fx-padding: 0;
+    -fx-control-inner-background: transparent;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-alignment: center-left;
+}
